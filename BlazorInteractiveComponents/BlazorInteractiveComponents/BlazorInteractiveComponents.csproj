@@ -7,21 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\NewFolder\**" />
-    <Content Remove="wwwroot\NewFolder\**" />
-    <EmbeddedResource Remove="wwwroot\NewFolder\**" />
-    <None Remove="wwwroot\NewFolder\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="wwwroot\js\node_modules\.package-lock.json" />
-    <Content Include="wwwroot\js\node_modules\canvas-gauges\package.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\js\node_modules\canvas-gauges\gauge.min.js" />
-    <None Include="wwwroot\js\node_modules\canvas-gauges\LICENSE" />
-    <None Include="wwwroot\js\node_modules\canvas-gauges\README.md" />
   </ItemGroup>
 
   <ItemGroup>

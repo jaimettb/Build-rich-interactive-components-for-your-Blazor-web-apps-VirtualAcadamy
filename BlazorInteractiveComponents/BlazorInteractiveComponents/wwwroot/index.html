@@ -21,6 +21,25 @@
     </div>
     <script src="_framework/blazor.webassembly.js"></script>
     <script src="js/node_modules/canvas-gauges/gauge.min.js"></script>
+    <script>
+        window.changeTitle = async (newTitle) => {
+            document.title = newTitle;
+        };
+    </script>
+
+    <script src="https://cdn.plot.ly/plotly-2.3.1.min.js"></script>
+    <script>
+        window.showGraph = (graphDiv, data) => {
+            console.log(graphDiv);
+            console.log(data);
+
+            var plotData = { y: data, type: 'lines' };
+
+            console.log(plotData);
+
+            Plotly.newPlot(graphDiv, [plotData], { title: 'Celsius Temperatures by Day' });
+        }
+    </script>
 </body>
 
 </html>

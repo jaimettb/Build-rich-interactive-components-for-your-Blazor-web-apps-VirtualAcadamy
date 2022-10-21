@@ -1,5 +1,6 @@
 ﻿@page "/fetchdata"
 @inject HttpClient Http
+@inject IJSRuntime JS
 
 <PageTitle>Weather forecast</PageTitle>
 
@@ -58,12 +59,27 @@ else
     </table>
 }
 
+<div style="height:600px" @ref=graphPlaceholder></div>
+
 @code {
     private WeatherForecast[]? forecasts;
+    private ElementReference graphPlaceholder;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("js/weather.json");
+        if (firstRender)
+        {
+            forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("js/weather.json");
+
+            await JS.InvokeVoidAsync("changeTitle", "Weather Forecast - changed");
+
+            var forecastTemperatures = (from t in forecasts
+                                        select t.TemperatureC).ToArray();
+
+            await JS.InvokeVoidAsync("showGraph", graphPlaceholder, forecastTemperatures);
+
+            StateHasChanged();
+        }
     }
 
     public class WeatherForecast
